@@ -4,6 +4,26 @@
     <TargetFrameworks>net452;net46;net47;net48;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <UseWindowsForms>true</UseWindowsForms>
+    <Authors>Evaristo Cuesta</Authors>
+    <Company>Evaristo Cuesta</Company>
+    <Description>FolderBrowserEx is a library to use the Windows Vista/7 Folder Browser in your .NET Framework and .NET Core Applications.</Description>
+    <PackageTags>netcore netframework csharp csharp-library classlibrary wpf folderbrowserdialog folder browser dialog windows windows-vista vista windows-7 mvvm</PackageTags>
+    <PackageProjectUrl>https://github.com/evaristocuesta/FolderBrowserEx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/evaristocuesta/FolderBrowserEx.git</RepositoryUrl>
+    <PackageId>FolderBrowserEx</PackageId>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Copyright © 2020 Evaristo Cuesta</Copyright>
+    <iconUrl>https://raw.githubusercontent.com/evaristocuesta/MessageDialogManagerLib/master/logo.png</iconUrl>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
