@@ -11,12 +11,7 @@ namespace MVVMBase
 
         public Command(Action execute, Func<bool> canExecute)
         {
-            if (execute == null)
-            {
-                throw new ArgumentNullException("execute");
-            }
-
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
 
             if (canExecute != null)
             {

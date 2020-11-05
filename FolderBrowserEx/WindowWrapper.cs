@@ -4,7 +4,7 @@ namespace FolderBrowserEx
 {
     class WindowWrapper : System.Windows.Forms.IWin32Window
     {
-        private IntPtr _hwnd;
+        private readonly IntPtr _hwnd;
 
         /// <summary>
         /// Constructor

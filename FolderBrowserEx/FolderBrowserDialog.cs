@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
@@ -11,6 +10,11 @@ namespace FolderBrowserEx
 {
     public class FolderBrowserDialog : IFolderBrowserDialog
     {
+        /// <summary>
+        /// Gets/sets the title of the dialog
+        /// </summary>
+        public string Title { get; set; }
+
         /// <summary>
         /// Gets/sets folder in which dialog will be open.
         /// </summary>
@@ -25,11 +29,27 @@ namespace FolderBrowserEx
         /// <summary>
         /// Gets selected folder.
         /// </summary>
-        public string SelectedFolder { get; set; }
+        public string SelectedFolder { get; private set; }
+
+        /// <summary>
+        /// Shows the folder browser dialog with a the default owner
+        /// </summary>
+        /// System.Windows.Forms.DialogResult.OK if the user clicks OK in the dialog box;
+        /// otherwise, System.Windows.Forms.DialogResult.Cancel.
+        /// </returns>
         public DialogResult ShowDialog()
         {
             return ShowDialog(owner: new WindowWrapper(GetHandleFromWindow(GetDefaultOwnerWindow())));
         }
+
+        /// <summary>
+        /// Shows the folder browser dialog with a the specified owner
+        /// </summary>
+        /// <param name="owner">Any object that implements IWin32Window to own the folder browser dialog</param>
+        /// <returns>
+        /// System.Windows.Forms.DialogResult.OK if the user clicks OK in the dialog box;
+        /// otherwise, System.Windows.Forms.DialogResult.Cancel.
+        /// </returns>
         public DialogResult ShowDialog(IWin32Window owner)
         {
             if (Environment.OSVersion.Version.Major >= 6)
@@ -44,8 +64,7 @@ namespace FolderBrowserEx
         private DialogResult ShowVistaDialog(IWin32Window owner)
         {
             var frm = (NativeMethods.IFileDialog)(new NativeMethods.FileOpenDialogRCW());
-            uint options;
-            frm.GetOptions(out options);
+            frm.GetOptions(out uint options);
             options |= NativeMethods.FOS_PICKFOLDERS |
                        NativeMethods.FOS_FORCEFILESYSTEM |
                        NativeMethods.FOS_NOVALIDATE |
@@ -54,35 +73,35 @@ namespace FolderBrowserEx
             frm.SetOptions(options);
             if (this.InitialFolder != null)
             {
-                NativeMethods.IShellItem directoryShellItem;
                 var riid = new Guid("43826D1E-E718-42EE-BC55-A1E261C37BFE"); //IShellItem
                 if (NativeMethods.SHCreateItemFromParsingName
                    (this.InitialFolder, IntPtr.Zero, ref riid,
-                    out directoryShellItem) == NativeMethods.S_OK)
+                    out NativeMethods.IShellItem directoryShellItem) == NativeMethods.S_OK)
                 {
                     frm.SetFolder(directoryShellItem);
                 }
             }
             if (this.DefaultFolder != null)
             {
-                NativeMethods.IShellItem directoryShellItem;
                 var riid = new Guid("43826D1E-E718-42EE-BC55-A1E261C37BFE"); //IShellItem
                 if (NativeMethods.SHCreateItemFromParsingName
                    (this.DefaultFolder, IntPtr.Zero, ref riid,
-                    out directoryShellItem) == NativeMethods.S_OK)
+                    out NativeMethods.IShellItem directoryShellItem) == NativeMethods.S_OK)
                 {
                     frm.SetDefaultFolder(directoryShellItem);
                 }
             }
+            if (this.Title != null)
+            {
+                frm.SetTitle(this.Title);
+            }
 
             if (frm.Show(owner.Handle) == NativeMethods.S_OK)
             {
-                NativeMethods.IShellItem shellItem;
-                if (frm.GetResult(out shellItem) == NativeMethods.S_OK)
+                if (frm.GetResult(out NativeMethods.IShellItem shellItem) == NativeMethods.S_OK)
                 {
-                    IntPtr pszString;
                     if (shellItem.GetDisplayName(NativeMethods.SIGDN_FILESYSPATH,
-                        out pszString) == NativeMethods.S_OK)
+                        out IntPtr pszString) == NativeMethods.S_OK)
                     {
                         if (pszString != IntPtr.Zero)
                         {
@@ -104,7 +123,7 @@ namespace FolderBrowserEx
         private DialogResult ShowLegacyDialog(IWin32Window owner)
         {
             System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog(owner) == DialogResult.OK)
             {
                 SelectedFolder = folderBrowserDialog.SelectedPath;
                 return DialogResult.OK;

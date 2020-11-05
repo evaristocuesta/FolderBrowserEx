@@ -1,17 +1,12 @@
 ﻿using FolderBrowserEx;
 using MVVMBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NetFrameworkSample
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private IFolderBrowserDialog _folderBrowserDialog;
+        private readonly IFolderBrowserDialog _folderBrowserDialog;
         private string _result;
 
         public MainWindowViewModel(IFolderBrowserDialog folderBrowserDialog)
@@ -35,6 +30,8 @@ namespace NetFrameworkSample
 
         private void ShowFolderBrowserCommandExecute()
         {
+            _folderBrowserDialog.Title = "Select a folder";
+            _folderBrowserDialog.InitialFolder = @"C:\";
             if (_folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Result += $"{_folderBrowserDialog.SelectedFolder}\n";
