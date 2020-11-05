@@ -15,7 +15,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <Copyright>Copyright © 2020 Evaristo Cuesta</Copyright>
-    <iconUrl>https://raw.githubusercontent.com/evaristocuesta/MessageDialogManagerLib/master/logo.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/evaristocuesta/FolderBrowserEx/master/logo.png</iconUrl>
     <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
