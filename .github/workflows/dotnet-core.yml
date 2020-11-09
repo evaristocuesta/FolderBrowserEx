@@ -21,6 +21,4 @@ jobs:
       run: dotnet restore
     - name: Build FolderBrowserEx
       run: dotnet build FolderBrowserEx\FolderBrowserEx.csproj --configuration Release --no-restore
-    - name: Build NetCoreSample
-      run: dotnet build Samples\NetFrameworkSample\NetFrameworkSample.csproj --configuration Release --no-restore
     
