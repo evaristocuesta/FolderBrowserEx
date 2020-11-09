@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFrameworkSample", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMBase", "Samples\MVVMBase\MVVMBase.csproj", "{5412C5E7-9EE7-46B6-BA5D-D486F5A3D220}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreSample", "Samples\NetCoreSample\NetCoreSample.csproj", "{213DD845-38A7-43D5-9C26-48798DBAC52B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{5412C5E7-9EE7-46B6-BA5D-D486F5A3D220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5412C5E7-9EE7-46B6-BA5D-D486F5A3D220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5412C5E7-9EE7-46B6-BA5D-D486F5A3D220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213DD845-38A7-43D5-9C26-48798DBAC52B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213DD845-38A7-43D5-9C26-48798DBAC52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213DD845-38A7-43D5-9C26-48798DBAC52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213DD845-38A7-43D5-9C26-48798DBAC52B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F722360B-B9B7-4032-AAC9-6F48C2DFD7B5} = {9F6CCACF-0F70-4A65-A691-EF3DBA504C66}
 		{5412C5E7-9EE7-46B6-BA5D-D486F5A3D220} = {9F6CCACF-0F70-4A65-A691-EF3DBA504C66}
+		{213DD845-38A7-43D5-9C26-48798DBAC52B} = {9F6CCACF-0F70-4A65-A691-EF3DBA504C66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5E30DE11-0284-497F-B151-6F08D3A0F46E}
