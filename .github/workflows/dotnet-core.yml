@@ -19,5 +19,8 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-    - name: Build
+    - name: Build FolderBrowserEx
       run: dotnet build FolderBrowserEx\FolderBrowserEx.csproj --configuration Release --no-restore
+    - name: Build NetCoreSample
+      run: dotnet build Samples\NetFrameworkSample\NetFrameworkSample.csproj --configuration Release --no-restore
+    
