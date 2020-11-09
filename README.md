@@ -1,5 +1,5 @@
 # FolderBrowserEx
-[![NuGet](https://img.shields.io/nuget/v/FolderBrowserEx)](https://nuget.org/packages/FolderBrowserEx/)
+[![NuGet](https://img.shields.io/nuget/v/FolderBrowserEx)](https://nuget.org/packages/FolderBrowserEx/) ![.NET Core](https://github.com/evaristocuesta/FolderBrowserEx/workflows/.NET%20Core/badge.svg)
 
 **FolderBrowserEx** is a library to use the Windows Vista/7 Folder Browser in your .NET Framework and .NET Core Applications. 
 
