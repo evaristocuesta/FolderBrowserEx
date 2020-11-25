@@ -31,6 +31,8 @@ namespace FolderBrowserEx
         /// </summary>
         public string SelectedFolder { get; private set; }
 
+        public bool AllowMultiSelect { get; set; }
+
         /// <summary>
         /// Shows the folder browser dialog with a the default owner
         /// </summary>
@@ -70,6 +72,10 @@ namespace FolderBrowserEx
                        NativeMethods.FOS_NOVALIDATE |
                        NativeMethods.FOS_NOTESTFILECREATE |
                        NativeMethods.FOS_DONTADDTORECENT;
+
+            if (AllowMultiSelect)
+                options |= NativeMethods.FOS_ALLOWMULTISELECT;
+
             frm.SetOptions(options);
             if (this.InitialFolder != null)
             {

@@ -26,6 +26,8 @@ namespace FolderBrowserEx
         /// </summary>
         string SelectedFolder { get; }
 
+        bool AllowMultiSelect { get; set; }
+
         /// <summary>
         /// Shows the folder browser dialog with a the default owner
         /// </summary>

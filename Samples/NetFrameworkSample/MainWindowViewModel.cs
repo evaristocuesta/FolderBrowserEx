@@ -32,6 +32,7 @@ namespace NetFrameworkSample
         {
             _folderBrowserDialog.Title = "Select a folder";
             _folderBrowserDialog.InitialFolder = @"C:\";
+            _folderBrowserDialog.AllowMultiSelect = true;
             if (_folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Result += $"{_folderBrowserDialog.SelectedFolder}\n";

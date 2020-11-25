@@ -13,6 +13,7 @@ namespace FolderBrowserEx
         public const uint FOS_NOVALIDATE = 0x00000100;
         public const uint FOS_NOTESTFILECREATE = 0x00010000;
         public const uint FOS_DONTADDTORECENT = 0x02000000;
+        public const uint FOS_ALLOWMULTISELECT = 0x00000200;
 
         public const uint S_OK = 0x0000;
 
