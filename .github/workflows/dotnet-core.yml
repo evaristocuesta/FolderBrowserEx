@@ -17,8 +17,18 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1    
     - name: Install dependencies
       run: dotnet restore
     - name: Build FolderBrowserEx
       run: dotnet build FolderBrowserEx\FolderBrowserEx.csproj --configuration Release --no-restore
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+    - name: Restore NuGet packages
+      run: nuget restore FolderBrowserEx.sln
+    - name: Build MVVMBase
+      run: msbuild Samples/MVVMBase/MVVMBase.csproj /p:Configuration=Release
+    - name: Build Sample
+      run: msbuild Samples/NetFrameworkSample/NetFrameworkSample.csproj /p:Configuration=Release
     
