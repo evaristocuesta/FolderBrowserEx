@@ -23,12 +23,14 @@ jobs:
       run: dotnet restore
     - name: Build FolderBrowserEx
       run: dotnet build FolderBrowserEx\FolderBrowserEx.csproj --configuration Release --no-restore
+    - name: Build Sample .NET Core
+      run: dotnet build Samples/NetCoreSample/NetCoreSample.csproj --configuration Release --no-restore
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
     - name: Restore NuGet packages
       run: nuget restore FolderBrowserEx.sln
     - name: Build MVVMBase
       run: msbuild Samples/MVVMBase/MVVMBase.csproj /p:Configuration=Release
-    - name: Build Sample
+    - name: Build Sample .NET Framework
       run: msbuild Samples/NetFrameworkSample/NetFrameworkSample.csproj /p:Configuration=Release
     
