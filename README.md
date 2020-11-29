@@ -134,7 +134,7 @@ namespace NetFrameworkSample
 
 Copyright © 2020 Evaristo Cuesta 
 
-**FolderBrowserEx** is provided as-is under the MIT license. For more information see [LICENSE](./LICENSE).
+**FolderBrowserEx** is provided as-is under the MIT license. For more information see [LICENSE](https://github.com/evaristocuesta/FolderBrowserEx/blob/master/LICENSE).
 
 ## Credits
 
