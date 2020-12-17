@@ -1,9 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace FolderBrowserEx
 {
     public interface IFolderBrowserDialog
-
     {
         /// <summary>
         /// Gets/sets the title of the dialog
@@ -22,9 +22,14 @@ namespace FolderBrowserEx
         string DefaultFolder { get; set; }
 
         /// <summary>
-        /// Gets selected folder.
+        /// Gets selected folder when AllowMultiSelect is false
         /// </summary>
         string SelectedFolder { get; }
+
+        /// <summary>
+        /// Gets selected folders when AllowMultiSelect is true.
+        /// </summary>
+        List<string> SelectedFolders { get; }
 
         bool AllowMultiSelect { get; set; }
 
@@ -46,6 +51,10 @@ namespace FolderBrowserEx
         /// otherwise, System.Windows.Forms.DialogResult.Cancel.
         /// </returns>
         DialogResult ShowDialog(IWin32Window owner);
+
+        /// <summary>
+        /// Dispose the object
+        /// </summary>
         void Dispose();
     }
 }

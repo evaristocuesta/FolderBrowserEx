@@ -46,9 +46,16 @@ public interface IFolderBrowserDialog
     string DefaultFolder { get; set; }
 
     /// <summary>
-    /// Gets selected folder.
+    /// Gets selected folder when AllowMultiSelect is false
     /// </summary>
     string SelectedFolder { get; }
+
+    /// <summary>
+    /// Gets selected folders when AllowMultiSelect is true.
+    /// </summary>
+    List<string> SelectedFolders { get; }
+
+    bool AllowMultiSelect { get; set; }
 
     /// <summary>
     /// Shows the folder browser dialog with a the default owner
@@ -68,6 +75,10 @@ public interface IFolderBrowserDialog
     /// otherwise, System.Windows.Forms.DialogResult.Cancel.
     /// </returns>
     DialogResult ShowDialog(IWin32Window owner);
+
+    /// <summary>
+    /// Dispose the object
+    /// </summary>
     void Dispose();
 }
 ```
@@ -77,6 +88,7 @@ To use in an application, you can follow this example code. There are others exa
 FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog()
 folderBrowserDialog.Title = "Select a folder";
 folderBrowserDialog.InitialFolder = @"C:\";
+folderBrowserDialog.AllowMultiSelect = false;
 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
 {
   string result += folderBrowserDialog.SelectedFolder;
@@ -119,8 +131,9 @@ namespace NetFrameworkSample
 
         private void ShowFolderBrowserCommandExecute()
         {
-            _folderBrowserDialog.Title = "Select a folder";
+            _folderBrowserDialog.Title = "Select multiple folders";
             _folderBrowserDialog.InitialFolder = @"C:\";
+            _folderBrowserDialog.AllowMultiSelect = true;
             if (_folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 Result += $"{_folderBrowserDialog.SelectedFolder}\n";

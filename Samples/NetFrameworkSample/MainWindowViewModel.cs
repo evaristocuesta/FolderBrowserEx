@@ -12,10 +12,18 @@ namespace NetFrameworkSample
         public MainWindowViewModel(IFolderBrowserDialog folderBrowserDialog)
         {
             _folderBrowserDialog = folderBrowserDialog;
-            ShowFolderBrowserCommand = new Command(ShowFolderBrowserCommandExecute, ShowFolderBrowserCommandCanExecute);
+            ShowFolderBrowserSingleSelectionCommand = new Command(
+                ShowFolderBrowserSingleSelectionCommandExecute, 
+                ShowFolderBrowserSingleSelectionCommandCanExecute);
+
+            ShowFolderBrowserMultipleSelectionCommand = new Command(
+                ShowFolderBrowserMultipleSelectionCommandExecute,
+                ShowFolderBrowserMultipleSelectionCommandCanExecute);
         }
 
-        public ICommand ShowFolderBrowserCommand { get; private set; }
+        public ICommand ShowFolderBrowserSingleSelectionCommand { get; private set; }
+
+        public ICommand ShowFolderBrowserMultipleSelectionCommand { get; private set; }
 
         public string Result
         { 
@@ -23,19 +31,36 @@ namespace NetFrameworkSample
             set { _result = value; OnPropertyChanged(); }
         }
 
-        private bool ShowFolderBrowserCommandCanExecute()
+        private bool ShowFolderBrowserSingleSelectionCommandCanExecute()
         {
             return true;
         }
 
-        private void ShowFolderBrowserCommandExecute()
+        private void ShowFolderBrowserSingleSelectionCommandExecute()
         {
             _folderBrowserDialog.Title = "Select a folder";
+            _folderBrowserDialog.InitialFolder = @"C:\";
+            _folderBrowserDialog.AllowMultiSelect = false;
+            if (_folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Result += $"{_folderBrowserDialog.SelectedFolder}\n";
+            }
+        }
+
+        private bool ShowFolderBrowserMultipleSelectionCommandCanExecute()
+        {
+            return true;
+        }
+
+        private void ShowFolderBrowserMultipleSelectionCommandExecute()
+        {
+            _folderBrowserDialog.Title = "Select multiple folders";
             _folderBrowserDialog.InitialFolder = @"C:\";
             _folderBrowserDialog.AllowMultiSelect = true;
             if (_folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Result += $"{_folderBrowserDialog.SelectedFolder}\n";
+                foreach (var folder in _folderBrowserDialog.SelectedFolders)
+                Result += $"{folder}\n";
             }
         }
     }

@@ -17,6 +17,7 @@
     <Copyright>Copyright © 2020 Evaristo Cuesta</Copyright>
     <iconUrl>https://raw.githubusercontent.com/evaristocuesta/FolderBrowserEx/master/logo.png</iconUrl>
     <PackageIcon>logo.png</PackageIcon>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
