@@ -120,8 +120,7 @@ namespace FolderBrowserEx
             {
                 if (AllowMultiSelect)
                 {
-                    NativeMethods.IShellItemArray shellItemArray;
-                    frm.GetResults(out shellItemArray);
+                    frm.GetResults(out NativeMethods.IShellItemArray shellItemArray);
                     shellItemArray.GetCount(out uint numFolders);
                     for (uint i = 0; i < numFolders; i++)
                     {
