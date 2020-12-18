@@ -11,11 +11,20 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button Content="Show Folder Browser"
-                Command="{Binding ShowFolderBrowserCommand}"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Button Content="Show Folder Browser Single Selection"
+                Command="{Binding ShowFolderBrowserSingleSelectionCommand}"
                 Margin="10"/>
+        <Button Content="Show Folder Browser Multiple Selection"
+                Grid.Column="1"
+                Command="{Binding ShowFolderBrowserMultipleSelectionCommand}"
+                Margin="10" />
         <TextBox Text="{Binding Result}"
                  Grid.Row="1" 
+                 Grid.ColumnSpan="2"
                  Margin="10"/>
     </Grid>
 </Window>

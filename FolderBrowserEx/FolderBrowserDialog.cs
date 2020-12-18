@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
@@ -10,6 +11,11 @@ namespace FolderBrowserEx
 {
     public class FolderBrowserDialog : IFolderBrowserDialog
     {
+        public FolderBrowserDialog()
+        {
+            SelectedFolders = new List<string>();
+        }
+
         /// <summary>
         /// Gets/sets the title of the dialog
         /// </summary>
@@ -21,7 +27,7 @@ namespace FolderBrowserEx
         public string InitialFolder { get; set; }
 
         /// <summary>
-        /// Gets/sets directory in which dialog will be open 
+        /// Gets/sets directory in which dialog will be open
         /// if there is no recent directory available.
         /// </summary>
         public string DefaultFolder { get; set; }
@@ -29,7 +35,17 @@ namespace FolderBrowserEx
         /// <summary>
         /// Gets selected folder.
         /// </summary>
-        public string SelectedFolder { get; private set; }
+        public string SelectedFolder 
+        {
+            get => SelectedFolders != null && SelectedFolders.Count >= 1 ? SelectedFolders[0] : string.Empty; 
+        }
+
+        /// <summary>
+        /// Gets selected folders when AllowMultiSelect is true.
+        /// </summary>
+        public List<string> SelectedFolders { get; private set; }
+
+        public bool AllowMultiSelect { get; set; }
 
         /// <summary>
         /// Shows the folder browser dialog with a the default owner
@@ -52,6 +68,7 @@ namespace FolderBrowserEx
         /// </returns>
         public DialogResult ShowDialog(IWin32Window owner)
         {
+            SelectedFolders.Clear();
             if (Environment.OSVersion.Version.Major >= 6)
             {
                 return ShowVistaDialog(owner);
@@ -63,13 +80,17 @@ namespace FolderBrowserEx
         }
         private DialogResult ShowVistaDialog(IWin32Window owner)
         {
-            var frm = (NativeMethods.IFileDialog)(new NativeMethods.FileOpenDialogRCW());
+            var frm = (NativeMethods.IFileOpenDialog)(new NativeMethods.FileOpenDialogRCW());
             frm.GetOptions(out uint options);
             options |= NativeMethods.FOS_PICKFOLDERS |
                        NativeMethods.FOS_FORCEFILESYSTEM |
                        NativeMethods.FOS_NOVALIDATE |
                        NativeMethods.FOS_NOTESTFILECREATE |
                        NativeMethods.FOS_DONTADDTORECENT;
+
+            if (AllowMultiSelect)
+                options |= NativeMethods.FOS_ALLOWMULTISELECT;
+
             frm.SetOptions(options);
             if (this.InitialFolder != null)
             {
@@ -95,10 +116,36 @@ namespace FolderBrowserEx
             {
                 frm.SetTitle(this.Title);
             }
-
             if (frm.Show(owner.Handle) == NativeMethods.S_OK)
             {
-                if (frm.GetResult(out NativeMethods.IShellItem shellItem) == NativeMethods.S_OK)
+                if (AllowMultiSelect)
+                {
+                    NativeMethods.IShellItemArray shellItemArray;
+                    frm.GetResults(out shellItemArray);
+                    shellItemArray.GetCount(out uint numFolders);
+                    for (uint i = 0; i < numFolders; i++)
+                    {
+                        shellItemArray.GetItemAt(i, out NativeMethods.IShellItem shellItem);
+                        if (shellItem.GetDisplayName(NativeMethods.SIGDN_FILESYSPATH,
+                        out IntPtr pszString) == NativeMethods.S_OK)
+                        {
+                            if (pszString != IntPtr.Zero)
+                            {
+                                try
+                                {
+                                    this.SelectedFolders.Add(Marshal.PtrToStringAuto(pszString));
+                                }
+                                finally
+                                {
+                                    Marshal.FreeCoTaskMem(pszString);
+                                }
+                            }
+                        }
+                    }
+                    return DialogResult.OK;
+                }
+                else if (!AllowMultiSelect && frm.GetResult(out NativeMethods.IShellItem shellItem) == NativeMethods.S_OK)
+
                 {
                     if (shellItem.GetDisplayName(NativeMethods.SIGDN_FILESYSPATH,
                         out IntPtr pszString) == NativeMethods.S_OK)
@@ -107,7 +154,7 @@ namespace FolderBrowserEx
                         {
                             try
                             {
-                                this.SelectedFolder = Marshal.PtrToStringAuto(pszString);
+                                this.SelectedFolders.Add(Marshal.PtrToStringAuto(pszString));
                                 return DialogResult.OK;
                             }
                             finally
@@ -125,7 +172,7 @@ namespace FolderBrowserEx
             System.Windows.Forms.FolderBrowserDialog folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             if (folderBrowserDialog.ShowDialog(owner) == DialogResult.OK)
             {
-                SelectedFolder = folderBrowserDialog.SelectedPath;
+                SelectedFolders.Add(folderBrowserDialog.SelectedPath);
                 return DialogResult.OK;
             }
 
@@ -151,8 +198,9 @@ namespace FolderBrowserEx
             return defaultWindow;
         }
 
+        /// <summary>
+        /// Dispose the object
+        /// </summary>
         public void Dispose() { } //just to have possibility of Using statement.
     }
-
-    
 }
