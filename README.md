@@ -69,7 +69,8 @@ public interface IFolderBrowserDialog
     /// <summary>
     /// Shows the folder browser dialog with a the specified owner
     /// </summary>
-    /// <param name="owner">Any object that implements IWin32Window to own the folder browser dialog</param>
+    /// <param name="owner">Any object that implements IWin32Window to own the 
+    /// folder browser dialog</param>
     /// <returns>
     /// System.Windows.Forms.DialogResult.OK if the user clicks OK in the dialog box;
     /// otherwise, System.Windows.Forms.DialogResult.Cancel.
@@ -113,7 +114,9 @@ namespace NetFrameworkSample
         public MainWindowViewModel(IFolderBrowserDialog folderBrowserDialog)
         {
             _folderBrowserDialog = folderBrowserDialog;
-            ShowFolderBrowserCommand = new Command(ShowFolderBrowserCommandExecute, ShowFolderBrowserCommandCanExecute);
+            ShowFolderBrowserCommand = new Command(
+                ShowFolderBrowserCommandExecute, 
+                ShowFolderBrowserCommandCanExecute);
         }
 
         public ICommand ShowFolderBrowserCommand { get; private set; }
