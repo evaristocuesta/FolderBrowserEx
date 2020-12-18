@@ -18,6 +18,7 @@
     <iconUrl>https://raw.githubusercontent.com/evaristocuesta/FolderBrowserEx/master/logo.png</iconUrl>
     <PackageIcon>logo.png</PackageIcon>
     <Version>1.0.1</Version>
+    <PackageReleaseNotes>https://github.com/evaristocuesta/FolderBrowserEx/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
