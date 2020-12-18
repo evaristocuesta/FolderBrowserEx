@@ -22,7 +22,7 @@ The aim of this project is to offer a Windows Vista look and feel folder browser
 
 To use this library, there are a few options:
 
-  - Download this repository
+  - Download the [Github repository](https://github.com/evaristocuesta/FolderBrowserEx)
   - Use the [FolderBrowserEx Nuget Package](https://nuget.org/packages/FolderBrowserEx/)
 
 The FolderBrowserDialog uses the IFolderBrowserDialog interface.
