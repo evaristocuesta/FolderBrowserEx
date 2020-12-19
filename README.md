@@ -137,7 +137,7 @@ namespace NetFrameworkSample
         {
             _folderBrowserDialog.Title = "Select multiple folders";
             _folderBrowserDialog.InitialFolder = @"C:\";
-            _folderBrowserDialog.AllowMultiSelect = true;
+            _folderBrowserDialog.AllowMultiSelect = false;
             if (_folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 Result += $"{_folderBrowserDialog.SelectedFolder}\n";
