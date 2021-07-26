@@ -1,9 +1,11 @@
 # FolderBrowserEx
 [![NuGet](https://img.shields.io/nuget/v/FolderBrowserEx)](https://nuget.org/packages/FolderBrowserEx/) [![Downloads](https://img.shields.io/nuget/dt/FolderBrowserEx)](https://nuget.org/packages/FolderBrowserEx/) [![.NET Core](https://github.com/evaristocuesta/FolderBrowserEx/workflows/.NET%20Core/badge.svg)](https://github.com/evaristocuesta/FolderBrowserEx/actions) [![Languages](https://img.shields.io/github/languages/top/evaristocuesta/FolderBrowserEx)](https://github.com/evaristocuesta/FolderBrowserEx/) [![License](https://img.shields.io/github/license/evaristocuesta/FolderBrowserEx)](https://raw.githubusercontent.com/evaristocuesta/FolderBrowserEx/master/LICENSE) [![Author](https://img.shields.io/badge/author-Evaristo%20Cuesta-blue)](https://www.evaristocuesta.com/)
 
-**FolderBrowserEx** is a library to use the Windows Vista/7 Folder Browser in your .NET Framework and .NET Core Applications. 
+**FolderBrowserEx** is a library to use the Windows Vista/7 Folder Browser in your .NET Framework and .NET Core Applications with which you can be able to select multiple folders. 
 
 Supporting .NET Framework (4.5+) and .NET Core (3.0 and 3.1)
+
+![Game Screenshot](./Resources/Screenshot-01.JPG)
 
 ## Table of contents
 
@@ -16,7 +18,7 @@ Supporting .NET Framework (4.5+) and .NET Core (3.0 and 3.1)
 
 In both .NET Framework and .NET Core applications we can use the control FolderBrowserDialog from System.Windows.Form. The problem is that the style of this controls looks very old and is very difficult to use, especially when it is compared to the new folder selection dialog which is used in Windows Vista. Unfortunately, it has not been included to .NET. 
 
-The aim of this project is to offer a Windows Vista look and feel folder browser dialog to easily give a more modern look to our .NET applications. 
+The aim of this project is to offer a Windows Vista look and feel folder browser dialog to easily give a more modern look to our .NET applications and with which you can be able to select multiple folders. 
 
 ## Getting Started
 
@@ -149,7 +151,7 @@ namespace NetFrameworkSample
 
 ## License
 
-Copyright © 2020 Evaristo Cuesta 
+Copyright © 2021 Evaristo Cuesta 
 
 **FolderBrowserEx** is provided as-is under the MIT license. For more information see [LICENSE](https://github.com/evaristocuesta/FolderBrowserEx/blob/master/LICENSE).
 
